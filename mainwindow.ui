@@ -18,7 +18,7 @@
     <item>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,7">
+       <layout class="QHBoxLayout" name="horizontalLayout" stretch="2,4">
         <property name="spacing">
          <number>30</number>
         </property>
@@ -63,7 +63,7 @@
        </layout>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,7">
+       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,4">
         <property name="spacing">
          <number>30</number>
         </property>
@@ -78,7 +78,7 @@
      </layout>
     </item>
     <item>
-     <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="2,7">
+     <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="2,4">
       <property name="spacing">
        <number>30</number>
       </property>
@@ -115,6 +115,13 @@
            </layout>
           </item>
          </layout>
+        </item>
+        <item>
+         <widget class="QPushButton" name="clearButton">
+          <property name="text">
+           <string>Очистить</string>
+          </property>
+         </widget>
         </item>
         <item>
          <spacer name="horizontalSpacer">

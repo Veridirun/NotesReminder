@@ -37,6 +37,7 @@ private slots:
     void updateListWidget();
     void removeRecordFromDatabase();
     void toggleDate();
+    void clearData();
 
 public:
     void saveSettings();

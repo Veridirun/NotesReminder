@@ -9,6 +9,11 @@ void MainWindow::About(){
     msg.exec();
 }
 
+void MainWindow::clearData(){
+    ui->noteText->clear();
+    ui->noteHeader->clear();
+}
+
 void MainWindow::loadFromFile(){
     if(ui->listWidget->currentItem()){
         QString filename = QFileDialog::getOpenFileName(nullptr, "Загрузить файл", QDir::currentPath(), "*.txt");
@@ -140,9 +145,22 @@ void MainWindow::updateListWidget(){
             header.truncate(15);
             header += "...";
         }
+        QString dateString = model->record(row).value("Date").toString();
+        QDateTime dateTime = QDateTime::fromString(dateString, "yyyy-MM-dd HH:mm:ss.zzz");
+        QString dateComparable = dateTime.toString("dd.MM.yyyy");
+        header += " " + dateComparable;
 
-        if(!header.contains(searchPrompt,Qt::CaseInsensitive)){
-            continue;
+        if(searchPrompt.front().isDigit() && !searchPrompt.isEmpty()){
+            QString dateString = model->record(row).value("Date").toString();
+            QDateTime dateTime = QDateTime::fromString(dateString, "yyyy-MM-dd HH:mm:ss.zzz");
+            QString dateComparable = dateTime.toString("dd.MM.yyyy");
+            if(!dateComparable.contains(searchPrompt,Qt::CaseInsensitive)){
+                continue;
+            }
+        } else {
+            if(!header.contains(searchPrompt,Qt::CaseInsensitive)){
+                continue;
+            }
         }
 
         int number = model->record(row).value("Number").toInt();
@@ -357,6 +375,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(ui->checkBox, &QCheckBox::toggled, this, &MainWindow::toggleDate);
     connect(ui->loadFromFileMenu, &QAction::triggered,this, &MainWindow::loadFromFile);
     connect(ui->saveToFileMenu, &QAction::triggered,this, &MainWindow::saveToFile);
+    connect(ui->clearButton, &QPushButton::clicked, this, &MainWindow::clearData);
 
     help = new HelpNotes();
     connect(ui->referenceMenu, SIGNAL(triggered()), help, SLOT(show()));
